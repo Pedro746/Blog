@@ -128,7 +128,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIR = (os.path.join(BASE_DIR, 'templates/static'),)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'templates/static'),)
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
@@ -145,7 +146,13 @@ MESSAGE_TAGS = {
 INSTALLED_APPS += ('django_summernote', )
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
-# try:
-#     from .local_settings import *
-# except:
-#     pass
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
+
+try:
+    from .local_settings import *
+except:
+    pass
